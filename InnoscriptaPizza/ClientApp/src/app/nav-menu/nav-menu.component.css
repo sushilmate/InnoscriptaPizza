@@ -1,0 +1,28 @@
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.numberCircle {
+  font-size: 10px;
+  background: greenyellow;
+  border-radius: 50%;
+  position: relative;
+  left: 6px;
+  top: -27px;
+  opacity: 0.9;
+  width: 14px;
+  height: 14px;
+  text-align:center;
+}

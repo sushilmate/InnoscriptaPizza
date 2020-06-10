@@ -1,0 +1,35 @@
+<header>
+  <nav style="background-color:orange" class="navbar navbar-expand-sm navbar-toggleable-sm">
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']"><img width="120" alt="Innoscripta Pizza" src="assets/svg0.svg" /></a>
+      <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target=".navbar-collapse"
+              aria-label="Toggle navigation"
+              [attr.aria-expanded]="isExpanded"
+              (click)="toggle()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
+           [ngClass]="{ show: isExpanded }">
+        <ul class="navbar-nav flex-grow">
+          <li class="nav-item" title="Menu"
+              [routerLinkActive]="['link-active']"
+              [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link text-dark" [routerLink]="['/']"><img src="assets/pizza.png" /></a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']" title="Your Cart">
+            <a class="nav-link text-dark" [routerLink]="['/counter']">
+              <img src="assets/cart.png" />
+              <div class="numberCircle">0</div>
+            </a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']" title="History">
+            <a class="nav-link text-dark" [routerLink]="['/fetch-data']"> <img src="assets/user.png" /></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
