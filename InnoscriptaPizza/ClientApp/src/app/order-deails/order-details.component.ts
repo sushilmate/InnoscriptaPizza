@@ -37,7 +37,7 @@ export class OrderDetailsComponent implements OnInit {
       this.AllCustomerOrders.finalTotal = discountedTotal + this.AllCustomerOrders.delieveryCharges;
     }
 
-  onConfirm(event) {
+  onConfirm() {
     alert("Thank you for ordering with us, your pizza will be delievered shortly.");
     localStorage.removeItem("pizza-details");
     this.cartService.removeCartItems();
