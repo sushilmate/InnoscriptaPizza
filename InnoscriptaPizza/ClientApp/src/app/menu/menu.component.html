@@ -1,4 +1,4 @@
-<div class="bd-bg-image">
+<div>
   <div style="font-weight:900; font-size:22px; border-bottom: 1px solid #808080; padding-left: 10px;">
     MENU
   </div>
@@ -10,7 +10,7 @@
       <td style="height: 80px;">
         <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">{{pizza.name | uppercase }}</div>
         <div style="font-weight:500; font-size: 14px; padding-bottom:10px;">{{pizza.description}}</div>
-        <div style="font-weight:500; font-size: 14px; padding-bottom:10px;">{{pizza.type}}</div>
+        <div style="font-weight:500; font-size: 14px; padding-bottom:10px;"><img src="assets/{{pizza.type}}.png">{{pizza.type}}</div>
         <div style="font-weight:500; font-size: 14px; padding-bottom:10px;">PRICE: {{pizza.priceInEuro | currency:'EUR'}} or {{pizza.priceInEuro | currency:'USD'}} </div>
         <form (ngSubmit)="onSubmit(pizza)">
           <div style="font-weight:500; font-size: 14px;">

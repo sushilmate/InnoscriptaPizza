@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { MenuComponent } from './menu/menu.component';
-import { CartComponent } from './cart/cart.component';
+import { OrderDetailsComponent } from './order-deails/order-details.component';
 import { LoginComponent } from './login/login.component';
 
 @NgModule({
@@ -15,7 +15,7 @@ import { LoginComponent } from './login/login.component';
     AppComponent,
     NavMenuComponent,
     MenuComponent,
-    CartComponent,
+    OrderDetailsComponent,
     LoginComponent
   ],
   imports: [
@@ -25,7 +25,7 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: MenuComponent, pathMatch: 'full' },
-      { path: 'cart', component: CartComponent },
+      { path: 'order-details', component: OrderDetailsComponent },
       { path: 'login', component: LoginComponent },
     ])
   ],

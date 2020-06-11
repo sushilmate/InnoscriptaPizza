@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CartService } from '../cart/shared/cart.service';
+import { CartService } from '../order-deails/shared/cart.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -16,6 +16,11 @@ export class NavMenuComponent {
     this.cartService.incrementCartItemsLength$.subscribe(
       counter => {
         this.cartCounter = this.cartCounter + counter;
+      });
+
+    this.cartService.removeCartItems$.subscribe(
+      () => {
+        this.cartCounter = 0;
       });
   }
 

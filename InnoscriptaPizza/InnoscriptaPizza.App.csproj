@@ -24,12 +24,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\cart\shared\cart.service.ts" />
+    <None Remove="ClientApp\src\app\order-deails\shared\cart.service.ts" />
     <None Remove="ClientApp\src\app\menu\shared\pizza-details.model.ts" />
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\cart\shared\cart.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\order-deails\shared\cart.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\menu\shared\pizza-details.model.ts" />
   </ItemGroup>
 

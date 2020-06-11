@@ -1,0 +1,49 @@
+<div>
+  <div style="font-weight:900; font-size:22px; border-bottom: 1px solid #808080; padding-left: 10px;">
+    ORDER DETAILS
+  </div>
+  <div>
+    <div style="float:left;width:300px;">
+      <table>
+        <tr *ngFor="let order of AllCustomerOrders.orderDetails" style="border-bottom: 2px solid #808080; padding-bottom:5px;">
+          <td>
+            <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">{{order.quantity}} X {{order.pizzaName | uppercase }}</div>
+            <div style="font-weight:500; font-size: 14px; padding-bottom:10px;">PRICE: {{order.totalPriceInEuro | currency:'EUR'}} or {{order.totalPriceInUsd | currency:'USD'}} </div>
+            <form (ngSubmit)="onSubmit(order)">
+              <div style="font-weight:500; font-size: 12px;">
+                <button class="btn-danger" type="submit" style="border-radius:2px;">REMOVE</button>
+              </div>
+            </form>
+          </td>
+        </tr>
+      </table>
+      <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">
+        Grand Total: {{this.AllCustomerOrders.grandTotal | currency: 'EUR'}}
+      </div>
+      <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">
+        Discount: {{this.AllCustomerOrders.discount | currency: 'EUR'}}
+      </div>
+      <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">
+        Delievery Charges: {{AllCustomerOrders.delieveryCharges | currency: 'EUR'}}
+      </div>
+      <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">
+        Final Amount: {{AllCustomerOrders.finalTotal | currency: 'EUR'}}
+      </div>
+    </div>
+    <div style="float:left; margin-left:20px;">
+      <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">
+        <form (ngSubmit)="onConfirm(event)">
+          <label>CUSTOMER DETAILS</label><br />
+          <label for="fname" style="height:10px;">FIRST NAME</label><br>
+          <input type="text" id="fname" name="fname"><br>
+          <label for="lname" style="height:10px;">LAST NAME</label><br>
+          <input type="text" id="lname" name="lname"><br>
+          <label for="lname" style="height:10px;">DELIEVERY ADDRESS</label><br>
+          <textarea name="address" cols="40" rows="2"></textarea><br />
+          <input type="submit" class="btn" value="CONFIRM ORDER">
+          <input type="button" (click)="onCancel()" class="btn-danger" style="border-radius:5px;font-size:12px;" value="CANCEL ORDER">
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

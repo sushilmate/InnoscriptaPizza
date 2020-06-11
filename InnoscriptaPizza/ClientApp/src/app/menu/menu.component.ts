@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PizzaDetails } from './shared/pizza-details.model';
-import { CartService } from '../cart/shared/cart.service';
+import { CartService } from '../order-deails/shared/cart.service';
 
 @Component({
   selector: 'app-menu',
@@ -37,18 +37,29 @@ export class MenuComponent implements OnInit {
   }
 
   onSubmit(pizzaData: PizzaDetails) {
-    const pizzaKey = pizzaData.id.toString();
-    const pizzaCartDetails = localStorage.getItem(pizzaKey);
+
+    const pizzaCartDetails = localStorage.getItem("pizza-details");
 
     if (pizzaCartDetails !== null) {
-      const parsedPizzaDetails = JSON.parse(pizzaCartDetails);
-      parsedPizzaDetails.quantity = pizzaData.quantity + parsedPizzaDetails.quantity;
-      localStorage.setItem(pizzaKey, JSON.stringify(parsedPizzaDetails));
+      const parsedPizzaDetails: PizzaDetails[] = JSON.parse(pizzaCartDetails);
+      const pizzaToUpdate = parsedPizzaDetails.find(x => x.id === pizzaData.id);
+      if (pizzaToUpdate !== null && pizzaToUpdate) {
+        pizzaToUpdate.quantity = pizzaData.quantity + pizzaToUpdate.quantity;
+        localStorage.setItem("pizza-details", JSON.stringify(parsedPizzaDetails));
+      }
+      else {
+        parsedPizzaDetails.push(pizzaData);
+        localStorage.setItem("pizza-details", JSON.stringify(parsedPizzaDetails));
+      }
     }
     else {
-      localStorage.setItem(pizzaKey, JSON.stringify(pizzaData));
+      const pizzaInCache: PizzaDetails[] = [];
+      pizzaInCache.push(pizzaData);
+
+      localStorage.setItem("pizza-details", JSON.stringify(pizzaInCache));
     }
 
     this.cartService.incrementCartItemsLength(pizzaData.quantity);
   }
 }
+

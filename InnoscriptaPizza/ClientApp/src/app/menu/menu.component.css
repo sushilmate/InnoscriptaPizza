@@ -8,16 +8,6 @@
   text-align: center;
 }
 
-.btn {
-  background-color: DodgerBlue;
-  border: none;
-  color: white;
-  font-size: 13px;
-  cursor: pointer;
-  margin-left: 3px;
-  margin-top: -5px;
-}
-
   /* Darker background on mouse-over */
   .btn:hover {
     background-color: RoyalBlue;
