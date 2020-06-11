@@ -1,5 +1,8 @@
 # Innoscripta Pizza
 
+## Deployed on Azure 
+https://InnoScripta.azurewebsites.net/
+
 ## Technologies
 * .NET Core 3.1
 * Angular 9
