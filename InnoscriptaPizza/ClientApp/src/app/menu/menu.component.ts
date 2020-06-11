@@ -70,10 +70,10 @@ export class MenuComponent implements OnInit {
       const parsedPizzaDetails: PizzaDetails[] = JSON.parse(pizzaCartDetails);
       const pizzaToUpdate = parsedPizzaDetails.find(x => x.id === pizzaData.id);
       if (pizzaToUpdate !== null && pizzaToUpdate) {
-        const pizzaCount = pizzaData.quantity - pizzaToUpdate.quantity;
+        const pizzaCount = pizzaToUpdate.quantity - pizzaData.quantity;
         pizzaToUpdate.quantity = pizzaCount > 0 ? pizzaCount : 0;
         localStorage.setItem("pizza-details", JSON.stringify(parsedPizzaDetails));
-        this.cartService.decrementCartItemsLength(pizzaToUpdate.quantity);
+        this.cartService.decrementCartItemsLength(pizzaData.quantity);
       }
     }
   }
