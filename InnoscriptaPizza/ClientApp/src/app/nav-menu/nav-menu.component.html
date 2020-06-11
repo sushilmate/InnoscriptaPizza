@@ -20,13 +20,13 @@
             <a class="nav-link text-dark" [routerLink]="['/']"><img src="assets/pizza.png" /></a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']" title="Your Cart">
-            <a class="nav-link text-dark" [routerLink]="['/counter']">
+            <a class="nav-link text-dark" [routerLink]="['/cart']">
               <img src="assets/cart.png" />
-              <div class="numberCircle">0</div>
+              <div class="numberCircle">{{cartCounter}}</div>
             </a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']" title="History">
-            <a class="nav-link text-dark" [routerLink]="['/fetch-data']"> <img src="assets/user.png" /></a>
+            <a class="nav-link text-dark" [routerLink]="['/login']"> <img src="assets/user.png" /></a>
           </li>
         </ul>
       </div>

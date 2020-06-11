@@ -16,6 +16,7 @@ html {
 
 .numberCircle {
   font-size: 10px;
+  font-weight: 500;
   background: greenyellow;
   border-radius: 50%;
   position: relative;
@@ -24,5 +25,5 @@ html {
   opacity: 0.9;
   width: 14px;
   height: 14px;
-  text-align:center;
+  text-align: center;
 }

@@ -1,6 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Provide sufficient contrast against white background */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  background-image: url('/assets/bg-tiled.jpg');
+}
+
 a {
   color: #0366d6;
 }
