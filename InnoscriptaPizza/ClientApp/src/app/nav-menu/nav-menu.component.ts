@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { CartService } from '../order-deails/shared/cart.service';
 
 @Component({
@@ -10,18 +11,30 @@ export class NavMenuComponent {
   isExpanded = false;
   cartCounter: number;
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService, private toastrService: ToastrService) {
     this.cartCounter = 0;
 
     this.cartService.incrementCartItemsLength$.subscribe(
       counter => {
         this.cartCounter = this.cartCounter + counter;
+        this.toastrService.success("Pizza added to the cart.", "",
+          {
+            timeOut: 1500
+          });
       });
 
     this.cartService.decrementCartItemsLength$.subscribe(
       counter => {
         const counterVal = this.cartCounter - counter;
-        this.cartCounter = counterVal > 0 ? counterVal : 0;
+        if (counterVal > 0) {
+          this.toastrService.error("Pizza removed from the cart.", "", {
+            timeOut: 1500
+          });
+          this.cartCounter = counterVal;
+        }
+        else {
+          this.cartCounter = 0;
+        }
       });
 
     this.cartService.removeCartItems$.subscribe(
