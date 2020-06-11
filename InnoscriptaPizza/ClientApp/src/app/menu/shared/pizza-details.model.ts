@@ -5,4 +5,5 @@ export class PizzaDetails {
   imageUrl: string;
   type: string;
   priceInEuro: number;
+  quantity: number;
 }
