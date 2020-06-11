@@ -18,17 +18,23 @@ export class NavMenuComponent {
         this.cartCounter = this.cartCounter + counter;
       });
 
-    this.cartService.removeCartItems$.subscribe(
-      () => {
-        this.cartCounter = 0;
+    this.cartService.decrementCartItemsLength$.subscribe(
+      counter => {
+        const counterVal = this.cartCounter - counter;
+        this.cartCounter = counterVal > 0 ? counterVal : 0;
       });
+
+    this.cartService.removeCartItems$.subscribe(
+        () => {
+          this.cartCounter = 0;
+        });
   }
 
-  collapse() {
-    this.isExpanded = false;
-  }
+collapse() {
+  this.isExpanded = false;
+}
 
-  toggle() {
-    this.isExpanded = !this.isExpanded;
-  }
+toggle() {
+  this.isExpanded = !this.isExpanded;
+}
 }

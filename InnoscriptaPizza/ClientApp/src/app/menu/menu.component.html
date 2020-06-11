@@ -1,4 +1,4 @@
-<div>
+<div style="float:left">
   <div style="font-weight:900; font-size:22px; border-bottom: 1px solid #808080; padding-left: 10px;">
     MENU
   </div>
@@ -17,9 +17,15 @@
             NUMBER <input name="quantity" type="number" size="4" style="width:50px; padding-right:5px;"
                           title="quantity" [(ngModel)]="pizza.quantity" min="1" max="500" step="1">
             <button class="btn" type="submit"><i class="fa fa-cart-arrow-down"></i> ADD</button>
+            <button class="btn" type="button" (click)="onRemove(pizza)" style="color:#7b0808"><i class="fa fa-remove"></i> REMOVE</button>
           </div>
         </form>
       </td>
     </tr>
   </table>
+</div>
+<div style="float:left;margin-top:50px;margin-left:20px;">
+  <button style="position:fixed" [routerLink]="'/order-details'" class="btn">
+    <i class="fa fa-shopping-cart"></i> ORDER
+  </button>
 </div>

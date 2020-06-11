@@ -61,5 +61,20 @@ export class MenuComponent implements OnInit {
 
     this.cartService.incrementCartItemsLength(pizzaData.quantity);
   }
-}
 
+  onRemove(pizzaData) {
+
+    const pizzaCartDetails = localStorage.getItem("pizza-details");
+
+    if (pizzaCartDetails !== null) {
+      const parsedPizzaDetails: PizzaDetails[] = JSON.parse(pizzaCartDetails);
+      const pizzaToUpdate = parsedPizzaDetails.find(x => x.id === pizzaData.id);
+      if (pizzaToUpdate !== null && pizzaToUpdate) {
+        const pizzaCount = pizzaData.quantity - pizzaToUpdate.quantity;
+        pizzaToUpdate.quantity = pizzaCount > 0 ? pizzaCount : 0;
+        localStorage.setItem("pizza-details", JSON.stringify(parsedPizzaDetails));
+        this.cartService.decrementCartItemsLength(pizzaToUpdate.quantity);
+      }
+    }
+  }
+}
