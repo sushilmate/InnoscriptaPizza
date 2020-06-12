@@ -6,12 +6,21 @@
     <div style="float:left;width:300px;">
       <table>
         <tr *ngFor="let order of AllCustomerOrders.orderDetails" style="border-bottom: 2px solid #808080; padding-bottom:5px;">
-          <td>
-            <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">{{order.quantity}} X {{order.pizzaName | uppercase }}</div>
-            <div style="font-weight:500; font-size: 14px; padding-bottom:10px;">PRICE: {{order.totalPriceInEuro | currency:'EUR'}} or {{order.totalPriceInUsd | currency:'USD'}} </div>
-            <form (ngSubmit)="onSubmit(order)">
+          <td style="padding-bottom:5px;
+">
+            <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">
+              {{order.quantity}} X {{order.name | uppercase }}
+            </div>
+            <div style="font-weight:500; font-size: 14px; padding-bottom:10px;">
+              PRICE: {{order.priceInEuro * order.quantity | currency:'EUR'}} OR
+              {{order.priceInEuro * order.quantity * 1.13 | currency:'USD'}}
+            </div>
+            <form (ngSubmit)="onAddOrder(order)">
               <div style="font-weight:500; font-size: 12px;">
-                <button class="btn-danger" type="submit" style="border-radius:2px;">REMOVE</button>
+                NUMBER <input name="quantity" type="number" size="4" style="width:50px; padding-right:5px;"
+                              title="quantity" [(ngModel)]="order.quantity" min="1" max="500" step="1">
+                <button class="btn" type="submit"><i class="fa fa-cart-arrow-down"></i> ADD</button>
+                <button class="btn" type="button" (click)="onRemoveOrder(order)" style="color:#7b0808"><i class="fa fa-remove"></i> REMOVE</button>
               </div>
             </form>
           </td>

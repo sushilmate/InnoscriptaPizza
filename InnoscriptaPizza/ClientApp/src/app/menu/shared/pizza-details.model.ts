@@ -6,4 +6,7 @@ export class PizzaDetails {
   type: string;
   priceInEuro: number;
   quantity: number;
+  constructor() {
+    this.quantity = 0;
+  }
 }

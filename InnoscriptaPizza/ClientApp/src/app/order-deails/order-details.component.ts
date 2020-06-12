@@ -15,27 +15,61 @@ export class OrderDetailsComponent implements OnInit {
     this.AllCustomerOrders = new CustomerOrderDetails();
 
   }
-    ngOnInit(): void {
+  ngOnInit(): void {
 
-      const parsedPizzaDetails: PizzaDetails[] = JSON.parse(localStorage.getItem("pizza-details"));
+    const parsedPizzaDetails: PizzaDetails[] = JSON.parse(localStorage.getItem("pizza-details"));
 
-      if (parsedPizzaDetails === null)
-        return;
+    if (parsedPizzaDetails === null)
+      return;
 
-      for (let i = 0; i < parsedPizzaDetails.length; i++) {
-
-        const pizzaOrder = new PizzaOrderDetails();
-        pizzaOrder.orderId = parsedPizzaDetails[i].id;
-        pizzaOrder.pizzaName = parsedPizzaDetails[i].name;
-        pizzaOrder.totalPriceInEuro = parsedPizzaDetails[i].priceInEuro * parsedPizzaDetails[i].quantity;
-        pizzaOrder.totalPriceInUsd = pizzaOrder.totalPriceInEuro * 1.13; // static conversion multiplier
-        pizzaOrder.quantity = parsedPizzaDetails[i].quantity;
-        this.AllCustomerOrders.grandTotal = this.AllCustomerOrders.grandTotal + pizzaOrder.totalPriceInEuro;
-        this.AllCustomerOrders.orderDetails.push(pizzaOrder);
-      }
-      const discountedTotal = this.AllCustomerOrders.grandTotal - this.AllCustomerOrders.discount;
-      this.AllCustomerOrders.finalTotal = discountedTotal + this.AllCustomerOrders.delieveryCharges;
+    for (let i = 0; i < parsedPizzaDetails.length; i++) {
+      this.AllCustomerOrders.grandTotal += parsedPizzaDetails[i].priceInEuro * parsedPizzaDetails[i].quantity;
+      this.AllCustomerOrders.orderDetails.push(parsedPizzaDetails[i]);
     }
+
+    const discountedTotal = this.AllCustomerOrders.grandTotal - this.AllCustomerOrders.discount;
+    this.AllCustomerOrders.finalTotal = discountedTotal + this.AllCustomerOrders.delieveryCharges;
+  }
+
+  onAddOrder(pizzaData) {
+    const pizzaCartDetails = localStorage.getItem("pizza-details");
+
+    if (pizzaCartDetails !== null) {
+      const parsedPizzaDetails: PizzaDetails[] = JSON.parse(pizzaCartDetails);
+      const pizzaToUpdate = parsedPizzaDetails.find(x => x.id === pizzaData.id);
+      if (pizzaToUpdate !== null && pizzaToUpdate) {
+        pizzaToUpdate.quantity = pizzaData.quantity + pizzaToUpdate.quantity;
+        localStorage.setItem("pizza-details", JSON.stringify(parsedPizzaDetails));
+      }
+      else {
+        parsedPizzaDetails.push(pizzaData);
+        localStorage.setItem("pizza-details", JSON.stringify(parsedPizzaDetails));
+      }
+    }
+    else {
+      const pizzaInCache: PizzaDetails[] = [];
+      pizzaInCache.push(pizzaData);
+
+      localStorage.setItem("pizza-details", JSON.stringify(pizzaInCache));
+    }
+
+    this.cartService.incrementCartItemsLength(pizzaData.quantity);
+  }
+
+  onRemoveOrder(pizzaData) {
+    const pizzaCartDetails = localStorage.getItem("pizza-details");
+
+    if (pizzaCartDetails !== null) {
+      const parsedPizzaDetails: PizzaDetails[] = JSON.parse(pizzaCartDetails);
+      const pizzaToUpdate = parsedPizzaDetails.find(x => x.id === pizzaData.id);
+      if (pizzaToUpdate !== null && pizzaToUpdate) {
+        const pizzaCount = pizzaToUpdate.quantity - pizzaData.quantity;
+        pizzaToUpdate.quantity = pizzaCount > 0 ? pizzaCount : 0;
+        localStorage.setItem("pizza-details", JSON.stringify(parsedPizzaDetails));
+        this.cartService.decrementCartItemsLength(pizzaData.quantity);
+      }
+    }
+  }
 
   onConfirm() {
     alert("Thank you for ordering with us, your pizza will be delievered shortly.");
@@ -43,6 +77,7 @@ export class OrderDetailsComponent implements OnInit {
     this.cartService.removeCartItems();
     this.AllCustomerOrders = new CustomerOrderDetails();
   }
+
   onCancel() {
     localStorage.removeItem("pizza-details");
     this.cartService.removeCartItems();
@@ -54,7 +89,7 @@ export class CustomerOrderDetails {
   name: string;
   surName: string;
   address: string;
-  orderDetails: PizzaOrderDetails[] = [];
+  orderDetails: PizzaDetails[] = [];
   grandTotal: number;
   discount: number;
   delieveryCharges: number;
@@ -68,10 +103,10 @@ export class CustomerOrderDetails {
   }
 }
 
-export class PizzaOrderDetails {
-  orderId: number;
-  pizzaName: string;
-  totalPriceInEuro: number;
-  totalPriceInUsd: number;
-  quantity: number;
-}
+//export class PizzaOrderDetails {
+//  orderId: number;
+//  pizzaName: string;
+//  totalPriceInEuro: number;
+//  totalPriceInUsd: number;
+//  quantity: number;
+//}

@@ -13,7 +13,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +33,10 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\order-deails\shared\cart.service.ts" />
     <None Remove="ClientApp\src\app\menu\shared\pizza-details.model.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InnoscriptaPizza.Persistence\InnoscriptaPizza.Persistence.csproj" />
   </ItemGroup>
 
   <ItemGroup>

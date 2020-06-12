@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
 import { PizzaDetails } from './shared/pizza-details.model';
 import { CartService } from '../order-deails/shared/cart.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-menu',
@@ -12,29 +13,13 @@ export class MenuComponent implements OnInit {
 
   public Pizzas: PizzaDetails[] = [];
 
-  constructor(private cartService: CartService) {
+  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private cartService: CartService) {
   }
 
   ngOnInit() {
-    const pizza = new PizzaDetails();
-    pizza.id = 1;
-    pizza.name = "Chilli Salami";
-    pizza.type = "Non-Veg";
-    pizza.description = "Lunch pizza with chilli salami 2,3 and shepherd's cheese. For additives, see below.";
-    pizza.imageUrl = "assets/images/1.jpg";
-    pizza.priceInEuro = 2.5;
-    pizza.quantity = 1;
-    this.Pizzas.push(pizza);
-
-    const pizza1 = new PizzaDetails();
-    pizza1.id = 2;
-    pizza1.name = "Chilli Paneer";
-    pizza1.type = "Veg";
-    pizza1.description = "Lunch pizza with chilli salami 2,3 and shepherd's cheese. For additives, see below.";
-    pizza1.imageUrl = "assets/images/1.jpg";
-    pizza1.priceInEuro = 4.5;
-    pizza1.quantity = 1;
-    this.Pizzas.push(pizza1);
+    this.http.get<PizzaDetails[]>(this.baseUrl + 'pizza').subscribe(result => {
+      this.Pizzas = result;
+    }, error => console.error(error));
   }
 
   onSubmit(pizzaData: PizzaDetails) {
@@ -45,7 +30,7 @@ export class MenuComponent implements OnInit {
       const parsedPizzaDetails: PizzaDetails[] = JSON.parse(pizzaCartDetails);
       const pizzaToUpdate = parsedPizzaDetails.find(x => x.id === pizzaData.id);
       if (pizzaToUpdate !== null && pizzaToUpdate) {
-        pizzaToUpdate.quantity = pizzaData.quantity + pizzaToUpdate.quantity;
+        pizzaToUpdate.quantity += pizzaToUpdate.quantity;
         localStorage.setItem("pizza-details", JSON.stringify(parsedPizzaDetails));
       }
       else {
