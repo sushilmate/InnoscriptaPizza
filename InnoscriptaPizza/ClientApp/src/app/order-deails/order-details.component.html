@@ -36,7 +36,7 @@
         Delievery Charges: {{AllCustomerOrders.delieveryCharges | currency: 'EUR'}}
       </div>
       <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">
-        Final Amount: {{AllCustomerOrders.finalTotal | currency: 'EUR'}}
+        Final Amount: {{ AllCustomerOrders.finalTotal | currency: 'EUR'}} OR {{AllCustomerOrders.finalTotal * 1.13 | currency: 'USD'}}
       </div>
     </div>
     <div style="float:left; margin-left:20px;">

@@ -112,7 +112,7 @@ export class OrderDetailsComponent implements OnInit {
 
   getOrderDetails(): OrderDetails {
 
-    var orderDescription = this.AllCustomerOrders.orderDetails.map(x => x.quantity + ' X ' + x.name).join('\n');
+    const orderDescription = this.AllCustomerOrders.orderDetails.map(x => x.quantity + ' X ' + x.name).join('\n');
 
     const order = new OrderDetails();
     order.amountPaid = this.AllCustomerOrders.finalTotal;
