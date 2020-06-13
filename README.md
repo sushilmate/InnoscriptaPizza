@@ -1,13 +1,19 @@
 # Innoscripta Pizza
 
-## Deployed on Azure 
+## Deployed on Azure Cloud
 https://InnoScripta.azurewebsites.net/
-
+## Database Azure Cloud
+innoscriptapizza-database-server.database.windows.net
 ## Technologies
 * .NET Core 3.1
-* Angular 9
+* Angular 10 RC
+* HTML5, CSS3, Bootstrap
+* Azure MS Sql Server
 * Entity Framework Core 3.1
 * AutoMapper
+* Swagger for Open API
+* Azure Cloud Hosting.
+
 
 ## Getting Started
 
