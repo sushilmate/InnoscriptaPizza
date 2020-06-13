@@ -30,8 +30,6 @@ namespace InnoscriptaPizza.Persistence
         {
             modelBuilder.Entity<OrderDetails>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.OrderDescription).IsUnicode(false);
 
                 entity.Property(e => e.Status).IsUnicode(false);

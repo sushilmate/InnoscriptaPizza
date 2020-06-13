@@ -14,6 +14,7 @@ export class MenuComponent implements OnInit {
   public Pizzas: PizzaDetails[] = [];
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private cartService: CartService) {
+    this.baseUrl += "api/";
   }
 
   ngOnInit() {

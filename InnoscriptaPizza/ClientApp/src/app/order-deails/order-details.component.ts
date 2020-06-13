@@ -1,6 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+
 import { PizzaDetails } from '../menu/shared/pizza-details.model';
 import { CartService } from './shared/cart.service';
+import { environment } from '../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
+
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  })
+};
 
 @Component({
   selector: 'app-order-details-component',
@@ -9,10 +20,13 @@ import { CartService } from './shared/cart.service';
 export class OrderDetailsComponent implements OnInit {
 
   AllCustomerOrders: CustomerOrderDetails;
+  userName: string;
 
-  constructor(private cartService: CartService) {
+  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
+    private cartService: CartService, private toastrService: ToastrService) {
 
     this.AllCustomerOrders = new CustomerOrderDetails();
+    this.baseUrl += "api/";
 
   }
   ngOnInit(): void {
@@ -23,7 +37,7 @@ export class OrderDetailsComponent implements OnInit {
       return;
 
     for (let i = 0; i < parsedPizzaDetails.length; i++) {
-      this.AllCustomerOrders.grandTotal += parsedPizzaDetails[i].priceInEuro * parsedPizzaDetails[i].quantity;
+      this.AllCustomerOrders.grandTotal += parsedPizzaDetails[i].priceInEur * parsedPizzaDetails[i].quantity;
       this.AllCustomerOrders.orderDetails.push(parsedPizzaDetails[i]);
     }
 
@@ -72,10 +86,22 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   onConfirm() {
-    alert("Thank you for ordering with us, your pizza will be delievered shortly.");
-    localStorage.removeItem("pizza-details");
-    this.cartService.removeCartItems();
-    this.AllCustomerOrders = new CustomerOrderDetails();
+    const order = this.getOrderDetails();
+
+    this.http.post<boolean>(this.baseUrl + "OrderDetails", order, httpOptions).subscribe(result => {
+      if (result) {
+        this.toastrService.success("Thank you for ordering with us, your pizza will be delievered shortly.",
+          "", { timeOut: 1500 });
+
+        localStorage.removeItem("pizza-details");
+        this.cartService.removeCartItems();
+        this.AllCustomerOrders = new CustomerOrderDetails();
+      }
+    }, error => {
+      this.toastrService.error("The order could not placed successfully, please re-order the delievery.",
+        "", { timeOut: 1500 });
+      console.error(error)
+    });
   }
 
   onCancel() {
@@ -83,6 +109,28 @@ export class OrderDetailsComponent implements OnInit {
     this.cartService.removeCartItems();
     this.AllCustomerOrders = new CustomerOrderDetails();
   }
+
+  getOrderDetails(): OrderDetails {
+
+    var orderDescription = this.AllCustomerOrders.orderDetails.map(x => x.quantity + ' X ' + x.name).join('\n');
+
+    const order = new OrderDetails();
+    order.amountPaid = this.AllCustomerOrders.finalTotal;
+    order.date = new Date();
+    order.orderDescription = orderDescription;
+    order.userName = this.userName.toLowerCase();
+    order.status = "Delievered";
+
+    return order;
+  }
+}
+
+export class OrderDetails {
+  userName: string;
+  date: Date;
+  orderDescription: string;
+  status: string
+  amountPaid: number;
 }
 
 export class CustomerOrderDetails {
@@ -102,11 +150,3 @@ export class CustomerOrderDetails {
     this.finalTotal = 0;
   }
 }
-
-//export class PizzaOrderDetails {
-//  orderId: number;
-//  pizzaName: string;
-//  totalPriceInEuro: number;
-//  totalPriceInUsd: number;
-//  quantity: number;
-//}

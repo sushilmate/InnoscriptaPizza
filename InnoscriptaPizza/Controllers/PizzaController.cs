@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace InnoscriptaPizza.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PizzaController : ControllerBase
     {
         private readonly IPizzaRepository _pizzaRepository;

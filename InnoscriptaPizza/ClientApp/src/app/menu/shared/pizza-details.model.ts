@@ -4,7 +4,7 @@ export class PizzaDetails {
   description: string;
   imageUrl: string;
   type: string;
-  priceInEuro: number;
+  priceInEur: number;
   quantity: number;
   constructor() {
     this.quantity = 0;

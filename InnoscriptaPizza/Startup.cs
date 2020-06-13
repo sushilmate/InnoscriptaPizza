@@ -43,6 +43,7 @@ namespace InnoscriptaPizza
             services.AddDbContext<InnoscriptaPizzaDBContext>(options => options.UseSqlServer(connectionString));
 
             services.AddScoped<IPizzaRepository, PizzaRepository>();
+            services.AddScoped<IOrderDetailsRepostiory, OrderDetailsRepostiory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

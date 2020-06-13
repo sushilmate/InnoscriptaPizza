@@ -3,14 +3,14 @@
     ORDER HISTORY DETAILS
   </div>
   <div>
-    <div style="float:left; margin-left:20px; width:300px;">
+    <div class="form-group" style="float:left; margin-left:20px;margin-right:50px; width:250px;">
       <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">
         <form (ngSubmit)="onLogin()">
           <label for="fname" style="height:10px;">USER NAME</label><br>
-          <input type="text" id="fname" name="username"><br>
+          <input class="form-control" [(ngModel)]="userName" type="text" id="fname" name="username"><br>
           <label for="lname" style="height:10px;">PASSWORD</label><br>
-          <input type="password" id="password" name="password"><br>
-          <input type="submit" class="btn" value="LOGIN">
+          <input class="form-control" type="password" id="password" name="password"><br>
+          <input class="btn" [disabled]="userName?.length < 0" type="submit" value="LOGIN">
         </form>
       </div>
     </div>
@@ -21,8 +21,8 @@
         <tr *ngFor="let order of orderDetails" style="border-bottom: 2px solid #808080; padding-bottom:5px;">
           <td>
             <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">Date {{order.date}}</div>
-            <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">{{order.quantity}} X {{order.pizzaName | uppercase }}</div>
-            <div style="font-weight:500; font-size: 14px; padding-bottom:10px;">Paid Amount: {{order.amount | currency:'EUR'}} or {{order.amount | currency:'USD'}} </div>
+            <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">{{order.orderDescription}}</div>
+            <div style="font-weight:500; font-size: 14px; padding-bottom:10px;">Paid Amount: {{order.amountPaid | currency:'EUR'}} or {{order.amountPaid * 1.13 | currency:'USD'}} </div>
             <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">Status {{order.status}}</div>
           </td>
         </tr>
