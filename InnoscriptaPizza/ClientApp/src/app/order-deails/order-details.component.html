@@ -55,7 +55,7 @@
             <textarea name="address" class="form-control" cols="40" rows="2"></textarea>
           </div>
           <div style="margin-bottom:10px;">
-            <input type="submit"  [disabled]="AllCustomerOrders.orderDetails.length < 0" class="btn btn-success" value="CONFIRM ORDER">
+            <input type="submit"  [disabled]="AllCustomerOrders.orderDetails.length <= 0" class="btn btn-success" value="CONFIRM ORDER">
             <input type="button" (click)="onCancel()" class="btn btn-danger" value="CANCEL ORDER">
           </div>
         </form>
