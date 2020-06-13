@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CartService {
+export class CartService implements OnDestroy {
   // Observable string sources
   private cartItemsLengthIncremented = new Subject<number>();
   private cartItemsLengthDecremented = new Subject<number>();
@@ -26,5 +26,11 @@ export class CartService {
 
   removeCartItems() {
     this.cartItemsRemove.next();
+  }
+
+  ngOnDestroy(): void {
+    this.cartItemsLengthDecremented.unsubscribe();
+    this.cartItemsLengthIncremented.unsubscribe();
+    this.cartItemsRemove.unsubscribe();
   }
 }
