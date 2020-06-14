@@ -5,6 +5,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -31,7 +32,8 @@ import { LoginComponent } from './login/login.component';
       { path: '', component: MenuComponent, pathMatch: 'full' },
       { path: 'order-details', component: OrderDetailsComponent },
       { path: 'login', component: LoginComponent },
-    ])
+    ]),
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

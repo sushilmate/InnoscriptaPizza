@@ -8,6 +8,7 @@ import { CartService } from './shared/cart.service';
 import { CustomerOrderDetails } from './shared/customer-order-details.order';
 import { MapperService } from '../shared/mapper.service';
 import { StorageService } from '../shared/storage.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 const httpOptions = {
@@ -28,7 +29,7 @@ export class OrderDetailsComponent implements OnInit {
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
     private cartService: CartService, private toastrService: ToastrService,
-    private mapper: MapperService, private storage: StorageService) {
+    private mapper: MapperService, private storage: StorageService, private spinner: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
@@ -64,6 +65,7 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   onConfirm() {
+    this.spinner.show();
     const order = this.mapper.mapOrderDetails(this.AllCustomerOrders, this.userName);
 
     this.http.post<boolean>(this.baseUrl + "OrderDetails", order, httpOptions).subscribe(result => {
@@ -79,7 +81,7 @@ export class OrderDetailsComponent implements OnInit {
       this.toastrService.error("The order could not placed successfully, please re-order the delievery.",
         "", { timeOut: 1500 });
       console.error(error)
-    });
+    }, () => { this.spinner.hide() });
   }
 
   onCancel() {
