@@ -8,7 +8,27 @@
   text-align: center;
 }
 
-  /* Darker background on mouse-over */
-  .btn:hover {
-    background-color: RoyalBlue;
-  }
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
+}
+
+.menu-items {
+  border-bottom: 2px solid #808080;
+}
+
+.pizza-image {
+  padding: 20px;
+  height: 200px;
+}
+
+.input-cart {
+  width: 50px;
+  padding-right: 5px;
+}
+
+.float-cart-btn {
+  float: left;
+  margin-top: 50px;
+  margin-left: 20px;
+}

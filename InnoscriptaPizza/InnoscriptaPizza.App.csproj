@@ -34,6 +34,11 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\order-deails\shared\cart.service.ts" />
     <None Remove="ClientApp\src\app\menu\shared\pizza-details.model.ts" />
+    <None Remove="ClientApp\src\app\order-deails\shared\customer-order-details.order.ts" />
+    <None Remove="ClientApp\src\app\order-deails\shared\order-details.model.ts" />
+    <None Remove="ClientApp\src\app\order-deails\shared\pizza-order-details.model.ts" />
+    <None Remove="ClientApp\src\app\shared\mapper.service.ts" />
+    <None Remove="ClientApp\src\app\shared\storage.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +48,11 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\order-deails\shared\cart.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\menu\shared\pizza-details.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\order-deails\shared\customer-order-details.order.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\order-deails\shared\order-details.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\order-deails\shared\pizza-order-details.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\mapper.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\storage.service.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -26,7 +26,7 @@ export class NavMenuComponent {
     this.cartService.decrementCartItemsLength$.subscribe(
       counter => {
         const counterVal = this.cartCounter - counter;
-        if (counterVal > 0) {
+        if (counterVal >= 0) {
           this.toastrService.error("Pizza removed from the cart.", "", {
             timeOut: 1500
           });
@@ -38,16 +38,16 @@ export class NavMenuComponent {
       });
 
     this.cartService.removeCartItems$.subscribe(
-        () => {
-          this.cartCounter = 0;
-        });
+      () => {
+        this.cartCounter = 0;
+      });
   }
 
-collapse() {
-  this.isExpanded = false;
-}
+  collapse() {
+    this.isExpanded = false;
+  }
 
-toggle() {
-  this.isExpanded = !this.isExpanded;
-}
+  toggle() {
+    this.isExpanded = !this.isExpanded;
+  }
 }

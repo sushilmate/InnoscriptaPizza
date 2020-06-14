@@ -1,31 +1,31 @@
-<div style="float:left">
-  <div style="font-weight:900; font-size:22px; border-bottom: 1px solid #808080; padding-left: 10px;">
+<div class="secondary-div">
+  <div class="secondary-header">
     MENU
   </div>
   <table>
-    <tr *ngFor="let pizza of Pizzas" style="border-bottom: 2px solid #808080">
-      <td style="height:100px;">
-        <img style="padding: 20px; height:200px;" src="{{pizza.imageUrl}}" />
+    <tr *ngFor="let pizza of Pizzas" class="menu-items">
+      <td>
+        <img class="pizza-image" src="{{pizza.imageUrl}}" />
       </td>
-      <td style="height: 80px;">
-        <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">{{pizza.name | uppercase }}</div>
-        <div style="font-weight:500; font-size: 14px; padding-bottom:10px;">{{pizza.description}}</div>
-        <div style="font-weight:500; font-size: 14px; padding-bottom:10px;"><img src="assets/{{pizza.type}}.png">{{pizza.type}}</div>
-        <div style="font-weight:500; font-size: 14px; padding-bottom:10px;">PRICE: {{pizza.priceInEur | currency:'EUR'}} or {{pizza.priceInEur | currency:'USD'}} </div>
-        <form (ngSubmit)="onSubmit(pizza)">
-          <div style="font-weight:500; font-size: 14px;">
-            NUMBER <input name="quantity" type="number" size="4" style="width:50px; padding-right:5px;"
+      <td>
+        <div class="primary-item">{{pizza.name | uppercase }}</div>
+        <div class="secondary-item">{{pizza.description}}</div>
+        <div class="secondary-item"><img src="assets/{{pizza.type}}.png">{{pizza.type}}</div>
+        <div class="secondary-item">PRICE: {{pizza.priceInEur | currency:'EUR'}} or {{pizza.priceInEur | currency:'USD'}} </div>
+        <form (ngSubmit)="onAddPizza(pizza)">
+          <div class="secondary-item">
+            NUMBER <input name="quantity" type="number" size="4" class="input-cart"
                           title="quantity" [(ngModel)]="pizza.quantity" min="1" max="500" step="1">
             <button class="btn" [disabled]="pizza.quantity < 1" type="submit"><i class="fa fa-cart-arrow-down"></i> ADD</button>
-            <button class="btn" [disabled]="pizza.quantity < 1" type="button" (click)="onRemove(pizza)" style="color:#7b0808"><i class="fa fa-remove"></i> REMOVE</button>
+            <button class="btn btn-remove" [disabled]="pizza.quantity < 1" type="button" (click)="onRemovePizza(pizza)"><i class="fa fa-remove"></i> REMOVE</button>
           </div>
         </form>
       </td>
     </tr>
   </table>
 </div>
-<div style="float:left;margin-top:50px;margin-left:20px;">
-  <button style="position:fixed" [routerLink]="'/order-details'" class="btn">
+<div class="float-cart-btn">
+  <button [routerLink]="'/order-details'" class="btn btn-fixed">
     <i class="fa fa-shopping-cart"></i> ORDER
   </button>
 </div>

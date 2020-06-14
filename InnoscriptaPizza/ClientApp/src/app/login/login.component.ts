@@ -1,10 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { OrderDetails } from '../order-deails/order-details.component';
+import { OrderDetails } from '../order-deails/shared/order-details.model';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   //public forecasts: WeatherForecast[];
@@ -12,7 +13,6 @@ export class LoginComponent {
   public userName: string;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-    this.baseUrl += "api/";
   }
 
   onLogin() {

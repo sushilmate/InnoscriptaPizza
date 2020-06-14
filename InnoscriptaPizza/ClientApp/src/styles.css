@@ -26,6 +26,14 @@ code {
   margin-top: -5px;
 }
 
+.btn-remove {
+  color: #7b0808;
+}
+
+.btn-fixed {
+  position: fixed;
+}
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
@@ -42,4 +50,95 @@ code {
   background-position-x: 40%;
   position: relative;
   background-size: cover;
+}
+
+.spinner {
+  margin: 300px auto;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  text-align: center;
+  -webkit-animation: sk-rotate 2.0s infinite linear;
+  animation: sk-rotate 2.0s infinite linear;
+}
+
+.dot1, .dot2 {
+  width: 60%;
+  height: 60%;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  background-color: #9a0c0c;
+  border-radius: 100%;
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.dot2 {
+  top: auto;
+  bottom: 0;
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-rotate {
+  100% {
+    -webkit-transform: rotate(360deg)
+  }
+}
+
+@keyframes sk-rotate {
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg)
+  }
+}
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% {
+    -webkit-transform: scale(0.0)
+  }
+
+  50% {
+    -webkit-transform: scale(1.0)
+  }
+}
+
+@keyframes sk-bounce {
+  0%, 100% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  }
+
+  50% {
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+
+.secondary-div {
+  float: left;
+}
+
+.secondary-header {
+  font-weight: 900;
+  font-size: 22px;
+  border-bottom: 1px solid #808080;
+  padding-left: 10px;
+}
+
+.primary-item {
+  font-weight: 700;
+  font-size: 16px;
+  padding-bottom: 10px;
+}
+
+.secondary-item {
+  font-weight: 500;
+  font-size: 14px;
+  padding-bottom: 10px;
+}
+
+.lbl-history-order {
+  border-bottom: 2px solid #808080;
 }

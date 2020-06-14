@@ -1,61 +1,60 @@
 <div>
-  <div style="font-weight:900; font-size:22px; border-bottom: 1px solid #808080; padding-left: 10px;">
+  <div class="secondary-header">
     ORDER DETAILS
   </div>
   <div>
-    <div style="float: left; width: 300px; padding-left: 10px;">
+    <div class="div-order-details">
       <table>
-        <tr *ngFor="let pizzaOrder of AllCustomerOrders.orderDetails" style="border-bottom: 2px solid #808080; padding-bottom:5px;">
-          <td style="padding-bottom:5px;
-">
-            <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">
+        <tr *ngFor="let pizzaOrder of AllCustomerOrders.orderDetails" class="tr-cart-order-details">
+          <td>
+            <div class="primary-item">
               {{pizzaOrder.description}}
             </div>
-            <div style="font-weight:500; font-size: 14px; padding-bottom:10px;">
+            <div class="secondary-item">
               PRICE: {{pizzaOrder.amount | currency:'EUR'}} OR
               {{pizzaOrder.amount * 1.13 | currency:'USD'}}
             </div>
             <form (ngSubmit)="onAddOrder(pizzaOrder)">
-              <div style="font-weight:500; font-size: 12px;">
-                NUMBER <input name="quantity" type="number" size="4" style="width:50px; padding-right:5px;"
+              <div class="div-cart-new">
+                NUMBER <input name="quantity" type="number" size="4" class="input-cart-new"
                               title="quantity" [(ngModel)]="pizzaOrder.quantity" min="1" max="500" step="1">
                 <button class="btn" [disabled]="pizzaOrder.quantity < 1" type="submit"><i class="fa fa-cart-arrow-down"></i> ADD</button>
-                <button class="btn" [disabled]="pizzaOrder.quantity < 1" type="button" (click)="onRemoveOrder(pizzaOrder)" style="color:#7b0808"><i class="fa fa-remove"></i> REMOVE</button>
+                <button class="btn btn-remove" [disabled]="pizzaOrder.quantity < 1" type="button" (click)="onRemoveOrder(pizzaOrder)"><i class="fa fa-remove"></i> REMOVE</button>
               </div>
             </form>
           </td>
         </tr>
       </table>
-      <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">
+      <div class="primary-item">
         Grand Total: {{this.AllCustomerOrders.grandTotal | currency: 'EUR'}}
       </div>
-      <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">
+      <div class="primary-item">
         Discount: {{this.AllCustomerOrders.discount | currency: 'EUR'}}
       </div>
-      <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">
+      <div class="primary-item">
         Delievery Charges: {{AllCustomerOrders.delieveryCharges | currency: 'EUR'}}
       </div>
-      <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">
+      <div class="primary-item">
         Final Amount: {{ AllCustomerOrders.finalTotal | currency: 'EUR'}} OR {{AllCustomerOrders.finalTotal * 1.13 | currency: 'USD'}}
       </div>
     </div>
-    <div style="float:left; margin-left:20px;">
-      <div style="font-weight:500; font-size: 14px;">
+    <div class="div-cust">
+      <div class="secondary-item">
         <form (ngSubmit)="onConfirm()">
-          <label>CUSTOMER DETAILS</label>
+          <label class="lbl-history-order">CUSTOMER DETAILS</label>
           <div class="form-group">
-            <label for="fname" style="height:10px;">USER NAME</label>
+            <label for="username">USER NAME</label>
             <input type="text" [(ngModel)]="userName" class="form-control" id="username" name="username">
-            <label style="font-weight:100; font-style:italic">  (user name required to check history of orders.)</label><br>
-            <label for="fname" style="height:10px;">FIRST NAME</label>
+            <label class="lbl-info">(user name required to check history of orders.)</label><br>
+            <label for="fname">FIRST NAME</label>
             <input type="text" class="form-control" id="fname" name="fname">
-            <label for="lname" style="height:10px;">LAST NAME</label>
+            <label for="lname">LAST NAME</label>
             <input type="text" class="form-control" id="lname" name="lname">
-            <label for="address" style="height:10px;">DELIEVERY ADDRESS</label>
-            <textarea name="address" class="form-control" cols="40" rows="2"></textarea>
+            <label for="address">DELIEVERY ADDRESS</label>
+            <textarea id="adress" name="address" class="form-control" cols="40" rows="2"></textarea>
           </div>
-          <div style="margin-bottom:10px;">
-            <input type="submit"  [disabled]="AllCustomerOrders.orderDetails.length <= 0" class="btn btn-success" value="CONFIRM ORDER">
+          <div>
+            <input type="submit" [disabled]="AllCustomerOrders.orderDetails.length <= 0" class="btn btn-success" value="CONFIRM ORDER">
             <input type="button" (click)="onCancel()" class="btn btn-danger" value="CANCEL ORDER">
           </div>
         </form>

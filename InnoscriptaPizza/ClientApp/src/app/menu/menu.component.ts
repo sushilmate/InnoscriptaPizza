@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-
-import { PizzaDetails } from './shared/pizza-details.model';
-import { CartService } from '../order-deails/shared/cart.service';
 import { HttpClient } from '@angular/common/http';
+
+import { CartService } from '../order-deails/shared/cart.service';
+import { PizzaDetails } from './shared/pizza-details.model';
 
 @Component({
   selector: 'app-menu',
@@ -13,8 +13,8 @@ export class MenuComponent implements OnInit {
 
   public Pizzas: PizzaDetails[] = [];
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private cartService: CartService) {
-    this.baseUrl += "api/";
+  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
+    private cartService: CartService) {
   }
 
   ngOnInit() {
@@ -23,45 +23,11 @@ export class MenuComponent implements OnInit {
     }, error => console.error(error));
   }
 
-  onSubmit(pizzaData: PizzaDetails) {
-
-    const pizzaCartDetails = localStorage.getItem("pizza-details");
-
-    if (pizzaCartDetails !== null) {
-      const parsedPizzaDetails: PizzaDetails[] = JSON.parse(pizzaCartDetails);
-      const pizzaToUpdate = parsedPizzaDetails.find(x => x.id === pizzaData.id);
-      if (pizzaToUpdate !== null && pizzaToUpdate) {
-        pizzaToUpdate.quantity += pizzaToUpdate.quantity;
-        localStorage.setItem("pizza-details", JSON.stringify(parsedPizzaDetails));
-      }
-      else {
-        parsedPizzaDetails.push(pizzaData);
-        localStorage.setItem("pizza-details", JSON.stringify(parsedPizzaDetails));
-      }
-    }
-    else {
-      const pizzaInCache: PizzaDetails[] = [];
-      pizzaInCache.push(pizzaData);
-
-      localStorage.setItem("pizza-details", JSON.stringify(pizzaInCache));
-    }
-
-    this.cartService.incrementCartItemsLength(pizzaData.quantity);
+  onAddPizza(pizzaData: PizzaDetails) {
+    this.cartService.AddPizzaToTheCart(pizzaData);    
   }
 
-  onRemove(pizzaData) {
-
-    const pizzaCartDetails = localStorage.getItem("pizza-details");
-
-    if (pizzaCartDetails !== null) {
-      const parsedPizzaDetails: PizzaDetails[] = JSON.parse(pizzaCartDetails);
-      const pizzaToUpdate = parsedPizzaDetails.find(x => x.id === pizzaData.id);
-      if (pizzaToUpdate !== null && pizzaToUpdate) {
-        const pizzaCount = pizzaToUpdate.quantity - pizzaData.quantity;
-        pizzaToUpdate.quantity = pizzaCount > 0 ? pizzaCount : 0;
-        localStorage.setItem("pizza-details", JSON.stringify(parsedPizzaDetails));
-        this.cartService.decrementCartItemsLength(pizzaData.quantity);
-      }
-    }
+  onRemovePizza(pizzaData: PizzaDetails) {
+    this.cartService.RemovePizzaFromTheCart(pizzaData);
   }
 }
