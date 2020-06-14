@@ -3,7 +3,6 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 import { PizzaDetails } from '../menu/shared/pizza-details.model';
 import { CartService } from './shared/cart.service';
-import { environment } from '../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
 
 
@@ -25,11 +24,15 @@ export class OrderDetailsComponent implements OnInit {
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string,
     private cartService: CartService, private toastrService: ToastrService) {
 
-    this.AllCustomerOrders = new CustomerOrderDetails();
     this.baseUrl += "api/";
-
   }
+
   ngOnInit(): void {
+    this.calculateCustomerOrder();
+  }
+
+  calculateCustomerOrder() {
+    this.AllCustomerOrders = new CustomerOrderDetails();
 
     const parsedPizzaDetails: PizzaDetails[] = JSON.parse(localStorage.getItem("pizza-details"));
 
@@ -37,8 +40,13 @@ export class OrderDetailsComponent implements OnInit {
       return;
 
     for (let i = 0; i < parsedPizzaDetails.length; i++) {
-      this.AllCustomerOrders.grandTotal += parsedPizzaDetails[i].priceInEur * parsedPizzaDetails[i].quantity;
-      this.AllCustomerOrders.orderDetails.push(parsedPizzaDetails[i]);
+      const pizzaOrder = new PizzaOrderDetails();
+      pizzaOrder.description = parsedPizzaDetails[i].quantity + ' X ' + parsedPizzaDetails[i].name;
+      pizzaOrder.amount = parsedPizzaDetails[i].priceInEur * parsedPizzaDetails[i].quantity;
+      pizzaOrder.id = parsedPizzaDetails[i].id;
+      pizzaOrder.quantity = 1;
+      this.AllCustomerOrders.grandTotal += pizzaOrder.amount;
+      this.AllCustomerOrders.orderDetails.push(pizzaOrder);
     }
 
     const discountedTotal = this.AllCustomerOrders.grandTotal - this.AllCustomerOrders.discount;
@@ -66,8 +74,8 @@ export class OrderDetailsComponent implements OnInit {
 
       localStorage.setItem("pizza-details", JSON.stringify(pizzaInCache));
     }
-
     this.cartService.incrementCartItemsLength(pizzaData.quantity);
+    this.calculateCustomerOrder();
   }
 
   onRemoveOrder(pizzaData) {
@@ -81,6 +89,7 @@ export class OrderDetailsComponent implements OnInit {
         pizzaToUpdate.quantity = pizzaCount > 0 ? pizzaCount : 0;
         localStorage.setItem("pizza-details", JSON.stringify(parsedPizzaDetails));
         this.cartService.decrementCartItemsLength(pizzaData.quantity);
+        this.calculateCustomerOrder();
       }
     }
   }
@@ -112,7 +121,7 @@ export class OrderDetailsComponent implements OnInit {
 
   getOrderDetails(): OrderDetails {
 
-    const orderDescription = this.AllCustomerOrders.orderDetails.map(x => x.quantity + ' X ' + x.name).join('\n');
+    const orderDescription = this.AllCustomerOrders.orderDetails.map(x => x.description).join(', ');
 
     const order = new OrderDetails();
     order.amountPaid = this.AllCustomerOrders.finalTotal;
@@ -137,7 +146,7 @@ export class CustomerOrderDetails {
   name: string;
   surName: string;
   address: string;
-  orderDetails: PizzaDetails[] = [];
+  orderDetails: PizzaOrderDetails[] = [];
   grandTotal: number;
   discount: number;
   delieveryCharges: number;
@@ -149,4 +158,11 @@ export class CustomerOrderDetails {
     this.delieveryCharges = 10;
     this.finalTotal = 0;
   }
+}
+
+export class PizzaOrderDetails {
+  id: number;
+  quantity: number;
+  description: string;
+  amount: number;
 }

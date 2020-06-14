@@ -10,7 +10,8 @@ export class AppComponent implements OnInit, OnDestroy {
     cc.cookieconsent.initialise({
       palette: {
         popup: {
-          background: "#"
+          background: "#000000",
+          opacity:"0.9"
         },
         button: {
           background: "#ffe000",
@@ -19,8 +20,8 @@ export class AppComponent implements OnInit, OnDestroy {
       },
       theme: "classic",
       content: {
-        message: "Our website uses cookies",
-        dismiss: "I understand",
+        message: "Our Websites use Cookies to ensure that we give our visitors the best possible experience by providing you personalized information, remembering your marketing and product preferences, and helping you to obtain the right information",
+        dismiss: "Accept",
       }
     });
   }

@@ -5,22 +5,22 @@
   <div>
     <div style="float: left; width: 300px; padding-left: 10px;">
       <table>
-        <tr *ngFor="let order of AllCustomerOrders.orderDetails" style="border-bottom: 2px solid #808080; padding-bottom:5px;">
+        <tr *ngFor="let pizzaOrder of AllCustomerOrders.orderDetails" style="border-bottom: 2px solid #808080; padding-bottom:5px;">
           <td style="padding-bottom:5px;
 ">
             <div style="font-weight:700; font-size: 16px; padding-bottom:10px;">
-              {{order.quantity}} X {{order.name | uppercase }}
+              {{pizzaOrder.description}}
             </div>
             <div style="font-weight:500; font-size: 14px; padding-bottom:10px;">
-              PRICE: {{order.priceInEur * order.quantity | currency:'EUR'}} OR
-              {{order.priceInEur * order.quantity * 1.13 | currency:'USD'}}
+              PRICE: {{pizzaOrder.amount | currency:'EUR'}} OR
+              {{pizzaOrder.amount * 1.13 | currency:'USD'}}
             </div>
-            <form (ngSubmit)="onAddOrder(order)">
+            <form (ngSubmit)="onAddOrder(pizzaOrder)">
               <div style="font-weight:500; font-size: 12px;">
                 NUMBER <input name="quantity" type="number" size="4" style="width:50px; padding-right:5px;"
-                              title="quantity" [(ngModel)]="order.quantity" min="1" max="500" step="1">
-                <button class="btn" [disabled]="order.quantity < 1" type="submit"><i class="fa fa-cart-arrow-down"></i> ADD</button>
-                <button class="btn" [disabled]="order.quantity < 1" type="button" (click)="onRemoveOrder(order)" style="color:#7b0808"><i class="fa fa-remove"></i> REMOVE</button>
+                              title="quantity" [(ngModel)]="pizzaOrder.quantity" min="1" max="500" step="1">
+                <button class="btn" [disabled]="pizzaOrder.quantity < 1" type="submit"><i class="fa fa-cart-arrow-down"></i> ADD</button>
+                <button class="btn" [disabled]="pizzaOrder.quantity < 1" type="button" (click)="onRemoveOrder(pizzaOrder)" style="color:#7b0808"><i class="fa fa-remove"></i> REMOVE</button>
               </div>
             </form>
           </td>
