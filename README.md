@@ -2,7 +2,7 @@
 
 ## Deployed on Azure Cloud
 https://InnoScripta.azurewebsites.net/
-## Database Azure Cloud
+## Database Azure Cloud server
 innoscriptapizza-database-server.database.windows.net
 
 ## Technologies
@@ -41,3 +41,10 @@ outside the cart and in the cart - Status - Done
 9. Don’t forget to add delivery costs to the final bill- Status - Done
 
 ### Features.
+1. Application is divided into two projects, one with apis & front end. another project contains the persistence layer. it has everything related to database, context, models, repositories etc.
+2. Project build on Open API principles so you can have access to apis here https://innoscripta.azurewebsites.net/swagger
+3. All the Rest API end points are built as asynchronous.
+4. Followed SOLID priniciples whereever possible.
+5. It has Logging, Mapper, Entity framework core, Fluent validation on models. 
+6. Front end build using latest version of angular, followed angular style guideline while building the app, the design of the app is inspired from famous websites from this field and most of the comes from me.
+7. In Front end I have used Angular 10, HTML5, CSS, bootstrap, Animation, Localstorage for cookies, animation for toaster, spinner icons for http opearations, live cart updates, floating order button on menu, tslint for analysis on typescript code, dependancy injection on services, shared models.    
