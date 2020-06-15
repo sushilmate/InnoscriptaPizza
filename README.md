@@ -47,4 +47,4 @@ outside the cart and in the cart - Status - Done
 4. Followed SOLID priniciples whereever possible.
 5. It has Logging, Mapper, Entity framework core, Fluent validation on models. 
 6. Front end build using latest version of angular, followed angular style guideline while building the app, the design of the app is inspired from famous websites from this field and most of the comes from me.
-7. In Front end I have used Angular 10, HTML5, CSS, bootstrap, Animation, Localstorage for cookies, animation for toaster, spinner icons for http opearations, live cart updates, floating order button on menu, tslint for analysis on typescript code, dependancy injection on services, shared models.    
+7. In Front end I have used Angular 10, HTML5, CSS, bootstrap, Animation, Localstorage for cookies, animation for toaster, spinner icons for http opearations, live cart updates, floating order button on menu, tslint for analysis on typescript code, dependancy injection on services, shared models, GDPR enabled.    
