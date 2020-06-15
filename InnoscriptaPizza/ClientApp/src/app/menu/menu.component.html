@@ -11,7 +11,7 @@
         <div class="primary-item">{{pizza.name | uppercase }}</div>
         <div class="secondary-item">{{pizza.description}}</div>
         <div class="secondary-item"><img src="assets/{{pizza.type}}.png" (load)="this.spinner.hide();">{{pizza.type}}</div>
-        <div class="secondary-item">PRICE: {{pizza.priceInEur | currency:'EUR'}} or {{pizza.priceInEur | currency:'USD'}} </div>
+        <div class="secondary-item">PRICE: {{pizza.priceInEur | currency:'EUR'}} or {{pizza.priceInEur * 1.13 | currency:'USD'}} </div>
         <form (ngSubmit)="onAddPizza(pizza)">
           <div class="secondary-item">
             NUMBER <input name="quantity" type="number" size="4" class="input-cart"
