@@ -67,7 +67,8 @@ export class CartService implements OnDestroy {
           parsedPizzaDetails = parsedPizzaDetails.filter(x => x !== pizzaToUpdate);
         }
         this.storage.setPizzaDetails(parsedPizzaDetails);
-        this.decrementCartItemsLength(pizzaData.quantity);
+        const total = parsedPizzaDetails.reduce((ty, u) => ty + u.quantity, 0);
+        this.decrementCartItemsLength(total);
       }
     }
   }

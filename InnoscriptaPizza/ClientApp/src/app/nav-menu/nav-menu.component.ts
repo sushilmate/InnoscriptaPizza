@@ -25,7 +25,7 @@ export class NavMenuComponent {
 
     this.cartService.decrementCartItemsLength$.subscribe(
       counter => {
-        const counterVal = this.cartCounter - counter;
+        const counterVal = counter;
         if (counterVal >= 0) {
           this.toastrService.error("Pizza removed from the cart.", "", {
             timeOut: 1500
