@@ -10,7 +10,7 @@
           <input class="form-control" [(ngModel)]="userName" type="text" id="username" name="username">
           <label for="password">PASSWORD</label>
           <input class="form-control" type="password" id="password" name="password"><br>
-          <input class="btn" [disabled]="userName?.length < 0" type="submit" value="LOGIN">
+          <input class="btn" [disabled]="userName === ''" type="submit" value="LOGIN">
         </form>
       </div>
     </div>
